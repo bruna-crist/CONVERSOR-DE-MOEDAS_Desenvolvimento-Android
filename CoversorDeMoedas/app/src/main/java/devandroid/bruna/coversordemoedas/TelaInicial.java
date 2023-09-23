@@ -34,19 +34,19 @@ public class TelaInicial extends AppCompatActivity {
         tvDolar = findViewById(R.id.tvDolar);
         tvBitcoin = findViewById(R.id.tvBitcoin);
         editReal = findViewById(R.id.editReal);
-        editDolar = findViewById(R.id.editReal);
+        editDolar = findViewById(R.id.editDolar); // Corrigido de editReal para editDolar
         editBitcoin = findViewById(R.id.editBitcoin);
     }
 
     public void verificar(View view){
         double real = Double.parseDouble(editReal.getText().toString());
-        double dolar = Double.parseDouble(editDolar.getText().toString());
-        double bitcoin = Double.parseDouble(editBitcoin.getText().toString());
+        double dolar = 4.94;
+        double bitcoin = 0.0000076;
 
+
+        double valorReal = dolar * real;
         double valorDolar = real / dolar;
-        double valorReal = dolar / real;
-        double valorBitcoin = real / bitcoin;
-
+        double valorBitcoin = real * bitcoin;
         tvReal.setText(""+ valorReal);
         tvDolar.setText(""+valorDolar);
         tvBitcoin.setText(""+valorBitcoin);
@@ -55,19 +55,19 @@ public class TelaInicial extends AppCompatActivity {
         // URL do site do Banco Central do Brasil
         String url = "https://www.bcb.gov.br/";
 
-        // Crie uma Intent para abrir o navegador com a URL
+        // Intent para abrir o navegador com a URL
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
 
-        // Verifique se há navegadores disponíveis no dispositivo
+        // Verificação de  navegadores disponíveis no dispositivo
         PackageManager packageManager = getPackageManager();
         List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
 
-        // Se houver navegadores disponíveis, inicie a atividade
+        // Se houver navegadores disponíveis, vai da inicio
         if (activities.size() > 0) {
             startActivity(intent);
         } else {
-            // Caso contrário, mostre uma mensagem de erro
+            // senao, vai mostrar uma mensagem de erro
             Toast.makeText(this, "Nenhum navegador disponível", Toast.LENGTH_SHORT).show();
         }
     }
